@@ -1,0 +1,64 @@
+Copyright 2022-2023 Horia-Valentin Moroianu 314CA
+
+                            Tema 3 - Editor de imagini
+
+Ierarhia temei este urmatoarea:
+    - defines.h: contine macro-urile folosite in cod si definitia structurilor 
+        de date pentru retinerea fisierelor
+
+    - functions.h/functions.c: contin functii intermediare ce sunt folosite 
+        in cadrul comenzilor
+
+    - main.h/main.c: contin functiile principale de prelucrare a imaginilor 
+        pentru fiecare comanda in parte
+
+Implementare:
+    Se citeste comanda si se identifica cu ajutorul unui dictionar de cuvinte, 
+    urmand ca programul sa apeleze cate o functie specifica pentru fiecare
+    dintre acestea.
+
+    Pentru operatia LOAD se deschide fisierul primit ca parametru si se citeste 
+    antetul acestuia. In functie de formatul fisierului, programul foloseste o 
+    metoda diferita de citire a imaginii pe care o salveaza in memorie.
+
+    Operatia SELECT stocheaza intr-un vector numerele din parametrul comenzii si
+    le verifica validitatea. Daca acestea au trecut de toate conditiile, else 
+    sunt salvate drept coordonate de selectie pentru imagine.
+
+    Operatia SELECT ALL actualizeaza coordonatele selectiei curente astfel incat
+    aceasta sa cuprinda coltul din stanga sus si cel din dreapta jos.
+
+    Operatia HISTOGRAM extrage ca si cea de SELECT numerele din parametrul 
+    comenzii. Stocheaza intr-un vector de frecventa valorile pixelilor din 
+    imagine si calculeaza cu ajutorul acestora fiecare bin in parte. Cu ajutorul
+    binurilor este aflat numarul de stele necesar in reprezentarea fiecaruia si 
+    este afisata histograma imaginii in formatul dorit.
+
+    Operatia EQUALIZE stocheaza intr-un vector de frecventa valorile pixelilor 
+    din imagine, urmand ca apoi sa il transforme intr-un vector de sume partiale
+    folosit in calculul noilor valori pentru pixeli.
+
+    Pentru operatia CROP este folosita o matrice auxiliara de dimensiunea 
+    selectiei curente, care se pastreaza in locul vechii imagini.
+
+    Pentru operatia APPLY se identifica tipul de nucleu de imagine care trebuie 
+    aplicat si este stocat intr-o matrice. Este alocata o matrice temporara 
+    pentru noile valori ale pixelilor. Se parcurg pixelii din cadrul selectiei 
+    curente, iar pentru fiecare in parte o zona de 3x3 in jurul acestora in care
+    se aplica nucleul de imagine. La final, sunt copiate noile valori din 
+    matricea temporara in imaginea salvata in memoria programului.
+
+    Operatia SAVE obtine din parametrul comenzii noul format in care se doreste 
+    salvarea imaginii, precum si numele acesteia. Este deschis fisierul si este 
+    scris antetul cu informatiile despre imagine, urmand sa fie scrise si 
+    valorile pixelilor in functie de formatul dorit.
+
+    Operatia EXIT elibereaza informatiile despre fisier, daca exita vreunul 
+    salvat in memoria programului si incheie executia acestuia.
+
+Bonus: 
+    Pentru operatia ROTATE se obtine din parametrul comenzii semnul dar 
+    si numarul de grade cu care se doreste rotirea. Cu ajutorul acestora se 
+    calculeaza de cate ori trebuie rotita selectia curenta cu 90 de grade pentru
+    a ajunge in pozitia dorita. Se efectueaza rotirile cu ajutorul unei matrice 
+    temporare care retine valorile pixelilor la noile coordonare.
